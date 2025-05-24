@@ -9,7 +9,7 @@ excel_data = pd.ExcelFile(file_path)
 df = excel_data.parse('Sheet1')
 
 # Filter the data to include only the specified layers
-layers_of_interest = ['Як', 'Як2', 'Дл1', 'Нх-III', 'ДЛ2', 'ДЛ3']
+layers_of_interest = ['Як2', 'Дл1']
 filtered_df = df[df['Пласт'].isin(layers_of_interest)]
 
 # Group by 'Пласт' and 'Группа', and count the number of samples in each group for the selected layers
@@ -24,7 +24,7 @@ for i, layer in enumerate(unique_layers, start=1):
     layer_data = filtered_distribution[filtered_distribution['Пласт'] == layer]
     plt.subplot(2, 3, i)
     plt.pie(layer_data['Количество образцов'], labels=['Группа ' + str(x) for x in layer_data['Группа']], autopct='%1.1f%%', startangle=140, wedgeprops={'edgecolor': 'black'}, textprops={'fontsize': 14})
-    plt.title(f'Распределение образцов по кластерам для пласта {layer}')
+    plt.title(f'Типы керна пласта {layer}', fontsize=18)
 
 plt.tight_layout()
 plt.savefig('./resources/cluster_distribution_pie_charts.png')

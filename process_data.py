@@ -22,9 +22,11 @@ os.makedirs('resources/grafs', exist_ok=True)
 def plot_pore_size_distribution_logx(x_values, y_values, sample_name, save_path):
     plt.figure(figsize=(10, 6))
     plt.plot(x_values, y_values, marker='o', linestyle='-')
-    plt.title(f'Распределение пор по размерам для {sample_name}')
-    plt.xlabel('Радиус пор, мкм')
-    plt.ylabel('Объем пор, %')
+    plt.title(f'Распределение пор по размерам для {sample_name}', fontsize=22)
+    plt.xlabel('Радиус пор, мкм', fontsize=18)
+    plt.ylabel('Объем пор, %', fontsize=18)
+    plt.xticks(fontsize=18)  # Размер шрифта чисел по оси X
+    plt.yticks(fontsize=18)  # Размер шрифта чисел по оси Y
     plt.xscale('log')
     plt.grid(True)
     plt.savefig(save_path)
@@ -34,19 +36,26 @@ def plot_pore_size_distribution_logx(x_values, y_values, sample_name, save_path)
 # Функция для построения вейвлет-скалограммы с логарифмической шкалой по оси X и сохранения в файл
 def plot_wavelet_scalogram_logx(signal, x_values, sample_name, save_path, wavelet='mexh'):
     plt.figure(figsize=(10, 6))
-    coef, freqs = pywt.cwt(signal, scales=np.logspace(0.05, 2, num=50), wavelet=wavelet)
-    plt.contourf(x_values, np.log2(freqs), np.abs(coef), levels=100, extend='both', cmap='jet')
-    plt.title(f'Вейвлет-скалограмма для {sample_name}')
-    plt.xlabel('Радиус пор, мкм')
-    plt.ylabel('Логарифм частот')
-    plt.colorbar(label='Величина')
+    coef, freqs = pywt.cwt(signal, scales=np.logspace(0.05, 2, num=200), wavelet=wavelet)
+    contour = plt.contourf(x_values, np.log2(freqs), np.abs(coef), levels=100, extend='both', cmap='jet')
+
+    plt.title(f'Вейвлет-скалограмма для {sample_name}', fontsize=22)
+    plt.xlabel('Радиус пор, мкм', fontsize=18)
+    plt.ylabel('Логарифм частот', fontsize=18)
+    plt.xticks(fontsize=18)
+    plt.yticks(fontsize=18)
+
+    cbar = plt.colorbar(contour)
+    cbar.set_label('Величина', fontsize=18)  # Set title fontsize
+    cbar.ax.tick_params(labelsize=18)  # Set tick numbers fontsize
+
     plt.xscale('log')
     plt.savefig(save_path)
     plt.close()
 
 
 # Функция для формирования единого пространства признаков после вейвлет-преобразования
-def create_feature_space(y_values_all, scales=np.logspace(0.1, 2, num=50), wavelet='mexh'):
+def create_feature_space(y_values_all, scales=np.logspace(0.1, 2, num=200), wavelet='mexh'):
     feature_space = []
     for y_values in y_values_all:
         coef, _ = pywt.cwt(y_values, scales=scales, wavelet=wavelet)

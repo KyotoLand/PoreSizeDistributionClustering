@@ -7,7 +7,7 @@ import random
 
 def create_pore_distribution_image(groups, group_path_template, output_path):
     fig, axes = plt.subplots(3, len(groups), figsize=(len(groups) * 6, 12))
-    fig.suptitle('Графики распределения пор по размерам для каждой группы', fontsize=16)
+    #fig.suptitle('Графики распределения пор по размерам для каждой группы', fontsize=22)
 
     for i, group in enumerate(groups):
         group_folder = group_path_template.format(group)
@@ -33,7 +33,7 @@ def create_pore_distribution_image(groups, group_path_template, output_path):
                 axes[j, i].imshow(image)
                 axes[j, i].axis('off')
                 if j == 0:
-                    axes[j, i].set_title(f'Группа {group}')
+                    axes[j, i].set_title(f'Группа {group}', fontsize=22)
             else:
                 axes[j, i].axis('off')
 
@@ -46,7 +46,7 @@ def create_pore_distribution_image(groups, group_path_template, output_path):
 
 def create_wavelet_scalogram_image(groups, group_path_template, output_path):
     fig, axes = plt.subplots(3, len(groups), figsize=(len(groups) * 6, 12))
-    fig.suptitle('Графики вейвлет скалограмм для каждой группы', fontsize=16)
+    #fig.suptitle('Графики вейвлет скалограмм для каждой группы', fontsize=22)
 
     for i, group in enumerate(groups):
         group_folder = group_path_template.format(group)
@@ -72,7 +72,7 @@ def create_wavelet_scalogram_image(groups, group_path_template, output_path):
                 axes[j, i].imshow(image)
                 axes[j, i].axis('off')
                 if j == 0:
-                    axes[j, i].set_title(f'Группа {group}')
+                    axes[j, i].set_title(f'Группа {group}', fontsize=22)
             else:
                 axes[j, i].axis('off')
 
@@ -83,7 +83,7 @@ def create_wavelet_scalogram_image(groups, group_path_template, output_path):
 
 # Параметры для групп и шаблонов путей
 
-GROUPS = [0, 1, 2, 3]
+GROUPS = [2, 3, 1]
 GROUP_PATH_TEMPLATE = 'resources/clusters/cluster_{}'
 
 # Создание комбинированного изображения для распределения пор

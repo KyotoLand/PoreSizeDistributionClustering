@@ -14,15 +14,16 @@ def plot_permeability_error(df, overall_avg_error):
     plt.figure(figsize=(12, 7))
 
     # Plotting individual group errors
-    plt.bar(df['Группа'], df['Процент ошибки проницаемости'], label='Ошибка по группам')
+    plt.bar(df['Группа'], df['Процент ошибки проницаемости'], label='Относительное СКО по группам')
 
     # Plotting the overall average as a horizontal line
-    plt.axhline(y=overall_avg_error, color='r', linestyle='--', label='Процент ошибки по всей выборке')
+    plt.axhline(y=overall_avg_error, color='r', linestyle='--', label='Относительное СКО по всей выборке')
 
-    plt.xlabel('Группа')
-    plt.ylabel('Процент ошибки проницаемости')
-    plt.title('Сравнение процентной ошибки проницаемости в группах и по всей выборке')
-    plt.legend()
+    plt.xlabel('Группа', fontsize=22)
+    plt.tick_params(axis='both', which='major', labelsize=22)
+    plt.ylabel('Относительное СКО проницаемости, %', fontsize=22)
+    plt.title('Сравнение относительного СКО проницаемости в группах и по всей выборке', fontsize=24)
+    plt.legend(fontsize=22)
     plt.grid(axis='y')
     plt.show()
 
@@ -31,16 +32,17 @@ def plot_porosity_error(df):
     plt.figure(figsize=(12, 7))
 
     # Plotting individual group errors
-    plt.bar(df['Группа'], df['Процент ошибки пористости'], label='Ошибка по группам')
+    plt.bar(df['Группа'], df['Процент ошибки пористости'], label='Относительное СКО по группам')
 
     # Plotting the overall average as a horizontal line
     overall_avg_error_porosity = df['Процент ошибки пористости'].mean()
-    plt.axhline(y=overall_avg_error_porosity, color='r', linestyle='--', label='Процент ошибки по всей выборке')
+    plt.axhline(y=overall_avg_error_porosity, color='r', linestyle='--', label='Относительное СКО по всей выборке')
 
-    plt.xlabel('Группа')
-    plt.ylabel('Процент ошибки пористости')
-    plt.title('Сравнение процентной ошибки пористости в группах и по всей выборке')
-    plt.legend()
+    plt.xlabel('Группа', fontsize=22)
+    plt.tick_params(axis='both', which='major', labelsize=22)
+    plt.ylabel('Относительное СКО пористости, %', fontsize=22)
+    plt.title('Сравнение относительного СКО пористости в группах и по всей выборке', fontsize=24)
+    plt.legend(fontsize=22)
     plt.grid(axis='y')
     plt.show()
 
